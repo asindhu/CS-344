@@ -18,6 +18,8 @@
 
 #include "sr_vns.h"
 #include "sr_base_internal.h"
+#include "sr_router.h"
+#include "sr_integration.h"
 
 #ifdef _CPUMODE_
 #include "sr_cpu_extension_nf2.h"
@@ -35,7 +37,13 @@
 
 void sr_integ_init(struct sr_instance* sr)
 {
-    printf(" ** sr_integ_init(..) called \n");
+   printf(" ** sr_integ_init(..) called \n");
+	
+	/* Register router state with global instance */
+	struct sr_router* subsystem = (struct sr_router*)malloc(sizeof(struct sr_router));
+	assert(subsystem);
+	sr_set_subsystem(get_sr(), subsystem);
+	
 } /* -- sr_integ_init -- */
 
 /*-----------------------------------------------------------------------------
